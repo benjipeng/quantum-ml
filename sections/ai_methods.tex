@@ -1,35 +1,78 @@
-Beyond the brief overview in the introduction, this section explores in greater depth the AI methods that have proven most valuable in quantum computing research.
+AI techniques are particularly well-suited for quantum computing challenges due to their ability to handle high-dimensional data and complex optimization problems. This section examines the mathematical principles of key AI approaches and their quantum computing applications.
 
-\subsection{Deep Neural Networks}
-Deep neural networks have demonstrated remarkable capabilities in learning complex patterns and representations. Their ability to approximate arbitrarily complex functions \cite{hornik1989multilayer} makes them suitable for modeling quantum systems and phenomena.
+\subsection{Neural Networks for Quantum Systems}
+Neural networks form the foundation of many AI approaches in quantum computing. A feed-forward neural network with $L$ layers can be expressed as a composition of functions:
 
-In the quantum domain, various neural network architectures have found applications:
+\begin{equation}
+f(x) = (f_L \circ f_{L-1} \circ \cdots \circ f_1)(x)
+\end{equation}
+
+where each layer $f_i(x) = \sigma(W_i x + b_i)$ applies a linear transformation followed by a non-linear activation function $\sigma$. The universal approximation theorem \cite{hornik1989multilayer} guarantees that such networks can represent arbitrarily complex functions - a critical property for modeling quantum phenomena.
+
+Quantum-specific neural network architectures include:
+
 \begin{itemize}
-    \item \textbf{Convolutional Neural Networks (CNNs)}: Particularly useful for processing grid-like data, such as quantum state tomography results or error syndromes in surface codes.
-    \item \textbf{Recurrent Neural Networks (RNNs)}: Well-suited for sequence modeling, including quantum control sequences and time-dependent processes \cite{banchi2018modelling}.
-    \item \textbf{Graph Neural Networks (GNNs)}: Effective for problems involving quantum circuits represented as graphs or for quantum error correction decoders.
-    \item \textbf{Transformers}: Increasingly applied to quantum circuit design and optimization tasks, leveraging their attention mechanisms to capture long-range dependencies.
+    \item \textbf{Convolutional Neural Networks (CNNs)}: Exploit spatial locality in quantum state tomography and error correction
+    \item \textbf{Recurrent Neural Networks (RNNs)}: Model temporal dynamics in quantum systems \cite{banchi2018modelling}
+    \item \textbf{Graph Neural Networks (GNNs)}: Process quantum circuits represented as directed acyclic graphs
+    \item \textbf{Transformers}: Capture long-range dependencies in quantum control sequences
 \end{itemize}
 
 \subsection{Reinforcement Learning for Quantum Control}
-Reinforcement learning has emerged as a powerful approach for quantum control problems \cite{bukov2018reinforcement}. By framing quantum control as a sequential decision-making problem, RL agents can discover pulse sequences and control strategies that outperform traditional approaches.
-
-Key advantages of RL in the quantum domain include:
+Reinforcement learning formulates quantum control as a Markov decision process (MDP), where:
 \begin{itemize}
-    \item Ability to explore the control landscape without explicit gradient information
-    \item Robustness to noise and uncertainty in the quantum system
-    \item Capacity to discover counter-intuitive control strategies
-    \item Adaptability to changing system parameters and constraints
+    \item States $s \in \mathcal{S}$ represent quantum system configurations
+    \item Actions $a \in \mathcal{A}$ correspond to control operations
+    \item Transition dynamics $P(s'|s,a)$ follow quantum mechanical laws
+    \item Reward function $R(s,a,s')$ measures control quality (e.g., gate fidelity)
+\end{itemize}
+
+RL aims to find a policy $\pi: \mathcal{S} \rightarrow \mathcal{A}$ maximizing expected cumulative reward:
+
+\begin{equation}
+J(\pi) = \mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^{T} \gamma^t R(s_t, a_t, s_{t+1})\right]
+\end{equation}
+
+where $\tau$ represents a trajectory of states and actions, and $\gamma$ is a discount factor.
+
+For quantum control \cite{bukov2018reinforcement}, RL offers several advantages:
+\begin{itemize}
+    \item Exploration of non-intuitive control strategies beyond traditional approaches
+    \item Adaptability to quantum system variations and uncertainties
+    \item End-to-end optimization without requiring analytical gradients
+    \item Ability to incorporate physical constraints directly into the learning process
 \end{itemize}
 
 \subsection{Generative Models for Quantum States and Circuits}
-Generative models have shown promise in creating quantum circuits and representing quantum states. Recent advances include:
+Generative models learn probability distributions over quantum objects (states, circuits, control sequences). Key approaches include:
+
 \begin{itemize}
-    \item \textbf{Variational Autoencoders (VAEs)}: Used for efficient encoding and generation of quantum circuits
-    \item \textbf{Generative Adversarial Networks (GANs)}: Applied to generate quantum states and circuit designs
-    \item \textbf{Diffusion Models}: Recently applied to quantum circuit synthesis \cite{furrutter2024quantum}
-    \item \textbf{Foundation Models}: Large-scale pretrained models that can be fine-tuned for specific quantum tasks
+    \item \textbf{Variational Autoencoders (VAEs)}: Encode quantum states or circuits into a lower-dimensional latent space via an encoder network $q_\phi(z|x)$ and decode via $p_\theta(x|z)$, trained to maximize:
+    \begin{equation}
+    \mathcal{L}(\theta, \phi; x) = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x) || p(z))
+    \end{equation}
+    
+    \item \textbf{Generative Adversarial Networks (GANs)}: Train a generator $G(z)$ to produce quantum circuits that a discriminator $D(x)$ cannot distinguish from real circuits
+    
+    \item \textbf{Diffusion Models}: Generate quantum circuits by reversing a gradual noising process \cite{furrutter2024quantum}
 \end{itemize}
 
-\subsection{Hybrid Classical-Quantum Machine Learning}
-At the intersection of quantum computing and AI lies hybrid classical-quantum machine learning, where quantum processors accelerate certain machine learning subroutines or provide quantum enhancements to classical algorithms. While outside the scope of this review, these developments highlight the synergistic relationship between AI and quantum computing. 
+These generative approaches are particularly valuable for discovering novel quantum circuits, error correction codes, and control sequences that human designers might not conceive.
+
+\subsection{Transfer Learning for Quantum Tasks}
+Transfer learning adapts models trained on one quantum task to another related task, addressing the challenge of limited training data. For a source task $\mathcal{T}_S$ and target task $\mathcal{T}_T$, knowledge transfer occurs when:
+
+\begin{equation}
+P(Y_T | X_T) = \int P(Y_T | X_T, K) P(K | \mathcal{T}_S) dK
+\end{equation}
+
+where $K$ represents transferable knowledge.
+
+Applications include:
+\begin{itemize}
+    \item Transferring learned representations between similar quantum hardware platforms
+    \item Adapting control strategies from simulated to real quantum systems
+    \item Scaling error correction decoders to larger code distances
+\end{itemize}
+
+These mathematical frameworks provide powerful tools for addressing quantum computing challenges, with implementations demonstrating clear advantages over traditional methods. 

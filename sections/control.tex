@@ -10,3 +10,71 @@ Reinforcement learning has emerged as a powerful approach for quantum control op
 \end{itemize}
 
 Recent work has demonstrated how reinforcement learning agents can break constraints imposed by adiabatic quantum control \cite{ding2021breaking}, potentially opening new routes to high-fidelity quantum operations. 
+
+Quantum systems require precise control to maintain coherence and execute operations with high fidelity. AI techniques offer significant advantages for both offline control optimization and real-time error management.
+
+\subsection{Optimal Control Theory}
+Quantum optimal control seeks time-dependent control fields $\{c_j(t)\}$ that drive a quantum system governed by the Hamiltonian:
+
+\begin{equation}
+H(t) = H_0 + \sum_j c_j(t) H_j
+\end{equation}
+
+where $H_0$ is the drift Hamiltonian and $\{H_j\}$ are control Hamiltonians. The goal is to evolve the system from an initial state $\rho_0$ to a target state $\rho_T$ or to implement a target unitary $U_T$.
+
+Traditional approaches like GRAPE (Gradient Ascent Pulse Engineering) use gradient information to optimize control parameters. AI methods extend these capabilities through:
+
+\begin{itemize}
+    \item \textbf{Model-free optimization}: Reinforcement learning agents can discover high-fidelity control sequences without explicit system models \cite{bukov2018reinforcement}
+    
+    \item \textbf{Robustness to uncertainty}: Neural network controllers can maintain performance despite variations in system parameters
+    
+    \item \textbf{Breaking adiabatic constraints}: RL approaches have discovered control protocols that exceed the speed limits of adiabatic control \cite{ding2021breaking}
+\end{itemize}
+
+\subsection{Real-time Adaptive Control}
+Real-time control adjusts operations based on continuous measurement feedback. For a partially observable quantum system, the control problem becomes a partially observable Markov decision process (POMDP) where:
+
+\begin{itemize}
+    \item States represent quantum density matrices $\rho$
+    \item Actions are control operations
+    \item Observations are measurement outcomes with probability distributions determined by quantum mechanics
+\end{itemize}
+
+Deep reinforcement learning strategies for this POMDP can be formulated using recurrent neural networks that maintain internal representations of quantum state estimates. The resulting controllers can:
+
+\begin{equation}
+\pi(a_t | o_1, o_2, \ldots, o_t) = \text{RNN}(o_t, h_{t-1})
+\end{equation}
+
+where $o_t$ are observations, $a_t$ are actions, and $h_t$ is the hidden state of the RNN.
+
+\subsection{Multi-qubit Operation Scheduling}
+Executing multiple operations across a quantum processor requires sophisticated scheduling to minimize crosstalk and maximize parallelism. Machine learning approaches formulate this as a constrained optimization problem:
+
+\begin{equation}
+\min_{\{t_i\}} \sum_i w_i t_i \quad \text{subject to constraints on overlapping operations}
+\end{equation}
+
+where $t_i$ represents the start time of operation $i$ and $w_i$ its priority weight.
+
+AI schedulers can consider hardware-specific constraints such as:
+\begin{itemize}
+    \item Control line bandwidth limitations
+    \item Crosstalk between neighboring qubits
+    \item Time-dependent noise characteristics
+    \item Variability in operation fidelities
+\end{itemize}
+
+\subsection{In-situ Calibration and Drift Compensation}
+Quantum systems exhibit parameter drift over time, requiring continuous recalibration. AI techniques enable efficient in-situ calibration through:
+
+\begin{itemize}
+    \item \textbf{Bayesian experimental design}: Selecting optimal calibration experiments to maximize information gain
+    
+    \item \textbf{Online learning}: Continuously updating system models based on observed performance
+    
+    \item \textbf{Predictive maintenance}: Forecasting parameter drift and scheduling preventive recalibration
+\end{itemize}
+
+These control techniques significantly enhance quantum computer performance by optimizing hardware operation at multiple timescales - from nanosecond pulse shaping to millisecond measurement feedback and hour-to-hour drift compensation. 

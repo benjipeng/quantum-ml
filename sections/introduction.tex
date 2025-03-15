@@ -1,20 +1,27 @@
-Quantum computing (QC) has the potential to revolutionize numerous scientific and industrial domains by solving certain otherwise intractable problems \cite{alexeev2021quantum}. As quantum hardware progresses from noisy intermediate-scale quantum (NISQ) devices toward fault-tolerant quantum computing (FTQC), researchers face numerous challenges in hardware design, error correction, and algorithm development.
+Quantum computing promises computational advantages for specific problems by harnessing quantum mechanical phenomena such as superposition and entanglement \cite{alexeev2021quantum}. As quantum hardware advances from noisy intermediate-scale quantum (NISQ) devices toward fault-tolerant systems, numerous technical challenges emerge across the quantum computing stack - from device physics to algorithm implementation.
 
-The complexity and non-linear nature of quantum mechanical systems make them particularly well-suited for artificial intelligence approaches \cite{dunjko2023artificial}. AI techniques offer powerful tools for recognizing patterns in high-dimensional spaces and finding solutions to complex optimization problems that arise throughout the quantum computing stack.
+Artificial intelligence offers powerful tools for addressing these challenges. The complex, high-dimensional, and non-linear nature of quantum systems makes them particularly amenable to AI approaches \cite{dunjko2023artificial}. Machine learning techniques excel at recognizing patterns in multidimensional spaces and optimizing complex functions - capabilities directly applicable to quantum computing problems.
 
-This review examines applications of state-of-the-art AI techniques that are advancing quantum computing research and development. We focus solely on how AI is advancing quantum computing (AI for quantum) rather than how quantum computers might eventually enhance AI (quantum for AI). The content is organized according to the sequence of tasks undertaken in designing and operating quantum computers, from hardware development through preprocessing, control, error correction, and postprocessing.
-
-\subsection{A Brief Survey of AI Methods}
-Machine learning (ML) encompasses various approaches to enabling computers to learn from data without explicit programming \cite{janiesch2021machine}. Within ML, we can distinguish several paradigms relevant to quantum computing:
+This article explores applications of AI techniques for enhancing quantum computing development and operation. We focus on how AI accelerates quantum computing research and implementation rather than on quantum computing's potential future impact on AI itself. The content addresses the complete quantum computing workflow:
 
 \begin{itemize}
-    \item \textbf{Supervised learning}: Models learn from labeled training data to make predictions on new inputs.
-    \item \textbf{Unsupervised learning}: Models identify patterns in unlabeled data, often through clustering or dimensionality reduction.
-    \item \textbf{Reinforcement learning (RL)}: Agents learn optimal behaviors through interaction with an environment, receiving rewards or penalties \cite{arulkumaran2017deep, shakya2023reinforcement}.
-    \item \textbf{Deep learning}: Neural networks with multiple layers extract hierarchical features from data \cite{lecun2015deep}.
-    \item \textbf{Generative models}: Models that can generate new content similar to their training data \cite{bernardo2007generative}.
-    \item \textbf{Transformer models}: Attention-based architectures particularly successful in natural language processing and increasingly applied to other domains \cite{vaswani2017attention}.
-    \item \textbf{Diffusion models}: Generative models that learn to reverse a gradual noising process \cite{ho2020denoising}.
+    \item Fundamental AI methods relevant to quantum computing applications
+    \item Hardware optimization, including device characterization and control pulse design
+    \item Circuit synthesis and optimization for efficient quantum algorithm implementation
+    \item Control systems and error management during quantum execution
+    \item Error correction and mitigation strategies for improving computational results
 \end{itemize}
 
-These techniques are being applied throughout quantum computing research, with varying degrees of specialization to quantum-specific challenges. 
+For each area, we present the mathematical foundations where appropriate and examine how AI techniques provide novel solutions to quantum computing challenges.
+
+AI approaches for quantum computing span several key paradigms:
+
+\begin{itemize}
+    \item \textbf{Supervised learning}: Models trained on labeled data to predict properties of quantum systems.
+    \item \textbf{Unsupervised learning}: Techniques that discover structure in quantum data without explicit labels.
+    \item \textbf{Reinforcement learning (RL)}: Agents that learn optimal control policies through interaction with quantum systems \cite{arulkumaran2017deep, shakya2023reinforcement}.
+    \item \textbf{Deep learning}: Neural networks extracting hierarchical features from quantum data \cite{lecun2015deep}.
+    \item \textbf{Generative models}: Architectures creating novel quantum circuits, control sequences, or error correction codes \cite{bernardo2007generative}.
+\end{itemize}
+
+These approaches, often in combination, are transforming quantum computing research by accelerating development cycles, discovering non-intuitive solutions, and extracting insights from complex quantum data. 
