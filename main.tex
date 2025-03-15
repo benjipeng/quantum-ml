@@ -1,35 +1,87 @@
-\documentclass[twocolumn,pra,superscriptaddress,nofootinbib]{revtex4-2}
+\documentclass[conference]{IEEEtran}
 
-% Essential packages
-\usepackage{amsmath}
-\usepackage{amssymb}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% Packages
+\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{hyperref}
-\usepackage{cleveref}
-\usepackage{booktabs}
+\usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{caption}
-\usepackage{subcaption}
+\usepackage{forest}
+\usetikzlibrary{trees,positioning,shapes,shadows,arrows.meta, calc}
+\usepackage{tikz}
+\usepackage{adjustbox} % For scaling the figure
+\usepackage{url}
 
-% Bibliography setup
-\usepackage[backend=bibtex,style=numeric-comp,sorting=none]{biblatex}
-\addbibresource{references.bib}
+% Custom command for line breaks in author block
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
 
 \begin{document}
 
 \title{Artificial Intelligence for Quantum Computing: A Comprehensive Review}
 
-\author{Your Name}
-\email{your.email@institution.edu}
-\affiliation{Your Institution, Department, City, Country}
+\author{
+    \IEEEauthorblockN{
+        Benji Peng\textsuperscript{*, a, b},
+        Chia Xin Liang \textsuperscript{c},
+        Keyu Chen\textsuperscript{a},
+        Ziqian Bi\textsuperscript{d}, 
+        Ming Liu\textsuperscript{e},
+        Yichao Zhang\textsuperscript{f}, \\
+        Tianyang Wang\textsuperscript{g},
+        Xinyuan Song \textsuperscript{h}
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{a}Georgia Institute of Technology, USA
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{b}AppCubic, USA
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{c}JTB Technology Corp., ROC
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{d}Indiana University, USA
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{e}Purdue University, USA
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{f}The University of Texas at Dallas, USA
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{g}University of Liverpool, UK
+    }
+    \IEEEauthorblockA{
+        \textsuperscript{h}Emory University, USA
+    }
+    \IEEEauthorblockA{
+        *Corresponding Email: benji@appcubic.com
+    }
+}
 
-\date{\today}
+\maketitle
+
+\begin{IEEEkeywords}
+test-time compute, large language models, inference optimization, adaptive computation, hardware acceleration
+\end{IEEEkeywords}
+
 
 \begin{abstract}
 Artificial intelligence (AI) advancements have revolutionized numerous scientific and engineering fields, including the nascent area of quantum computing (QC). The high-dimensional nature and counterintuitive properties of quantum systems make them particularly well-suited for AI's pattern recognition capabilities. This review examines how state-of-the-art AI techniques are advancing research across the quantum computing stack - from hardware design to applications. We explore current achievements and future directions where AI may help overcome major challenges in quantum computing development.
 \end{abstract}
 
-\maketitle
 
 \section{Introduction}
 \input{sections/introduction}
@@ -58,6 +110,7 @@ Artificial intelligence (AI) advancements have revolutionized numerous scientifi
 \section{Conclusion}
 \input{sections/conclusion}
 
-\printbibliography
+\bibliographystyle{ieeetr}  
+\bibliography{references} 
 
 \end{document} 
