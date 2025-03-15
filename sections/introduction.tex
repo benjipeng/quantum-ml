@@ -4,6 +4,46 @@ Artificial intelligence offers powerful tools for addressing these challenges. T
 
 This article explores applications of AI techniques for enhancing quantum computing development and operation. We focus on how AI accelerates quantum computing research and implementation rather than on quantum computing's potential future impact on AI itself. The content addresses the complete quantum computing workflow, from fundamental AI methods relevant to quantum applications through hardware optimization, circuit synthesis, control systems, error management, and error correction strategies. For each area, we present the mathematical foundations where appropriate and examine how AI techniques provide novel solutions to quantum computing challenges.
 
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[node distance=1.2cm, auto, >=latex', scale=0.7, transform shape]
+    % Define nodes
+    \node [rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, draw=black, fill=gray!10] (qh) {Quantum Hardware};
+    \node [rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, draw=black, fill=gray!10, above of=qh, node distance=2cm] (ctl) {Quantum Control \& Error Management};
+    \node [rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, draw=black, fill=gray!10, above of=ctl, node distance=2cm] (circ) {Circuit Synthesis \& Optimization};
+    \node [rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, draw=black, fill=gray!10, above of=circ, node distance=2cm] (error) {Error Correction \& Mitigation};
+    \node [rectangle, rounded corners, minimum width=12cm, minimum height=1.5cm, draw=black, fill=gray!10, above of=error, node distance=2cm] (app) {Quantum Applications};
+    
+    % Define AI box
+    \node [rectangle, rounded corners, minimum width=3cm, minimum height=11cm, draw=aigreen!80, thick, fill=aigreen!10, left of=ctl, node distance=7.5cm] (ai) {AI Methods};
+    
+    % Define arrows
+    \draw[->, thick, aigreen] (ai.east) -- ++(1,0) |- (qh.west);
+    \draw[->, thick, aigreen] (ai.east) -- ++(1,0) |- (ctl.west);
+    \draw[->, thick, aigreen] (ai.east) -- ++(1,0) |- (circ.west);
+    \draw[->, thick, aigreen] (ai.east) -- ++(1,0) |- (error.west);
+    \draw[->, thick, aigreen] (ai.east) -- ++(1,0) |- (app.west);
+    
+    % Labels for quantum computing layers
+    \node[right] at (qh.west) {\textbf{Hardware Design \& Optimization}};
+    \node[right] at (ctl.west) {\textbf{Pulse Design \& Real-time Control}};
+    \node[right] at (circ.west) {\textbf{Algorithm Implementation}};
+    \node[right] at (error.west) {\textbf{Noise Mitigation \& Correction}};
+    \node[right] at (app.west) {\textbf{Quantum Algorithm Design}};
+    
+    % AI methods labels
+    \node[align=left] at (ai) {
+        \textbf{Neural Networks}\\[0.2cm]
+        \textbf{Reinforcement Learning}\\[0.2cm]
+        \textbf{Generative Models}\\[0.2cm]
+        \textbf{Transfer Learning}
+    };
+    
+\end{tikzpicture}
+\caption{Integration of AI methods across the quantum computing stack. AI techniques enhance each layer of quantum computing development, from hardware design to application implementation. The bidirectional relationship enables advances in both fields, with quantum computing challenges driving AI innovation.}
+\label{fig:ai_quantum_stack}
+\end{figure}
+
 \subsection{AI Paradigms for Quantum Computing}
 
 Several key AI paradigms have demonstrated particular relevance to quantum computing challenges. Supervised learning models, trained on labeled data, can predict properties of quantum systems with remarkable accuracy. These methods have proven effective for tasks such as predicting the ground state energies of molecular systems or estimating the fidelity of quantum operations under noise.
