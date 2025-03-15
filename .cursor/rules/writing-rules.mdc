@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# LaTeX Writing Guidelines for CS/ML Research Papers
+
+## Purpose
+This rule provides guidelines for writing LaTeX documents for computer science and machine learning research papers intended for arxiv.org and the CS/ML academic community.
+
+## Writing Style
+
+### Word Choice
+- Avoid these overused academic terms: "delve", "moreover", "furthermore", "pivotal", "tapestry", "vital", "comprehensive", "embark", "notably", "excels", "undoubtedly", "landscape", "vibrant", "arguably", "catalyst", "engage", "seamlessly", "paradigm", "optimize", "framework"
+- Maintain precise technical terminology where appropriate for CS/ML concepts
+- Choose clear, effective language over flowery or verbose expressions
+
+### Document Structure
+- Write direct, clear content without unnecessary repetition
+- Do not overuse summary sections at the end of sections unless needed
+- Focus on communicating ideas efficiently without redundancy
+- Organize content logically with clear transitions between concepts
+
+## LaTeX Formatting
+- Use consistent mathematical notation throughout the paper
+- Follow standard LaTeX practices for the arxiv.org CS/ML community
+- Structure sections with appropriate \section, \subsection commands
+- Use proper BibTeX citations following standard CS conference formats
+
+## Code Examples (if needed)
+- Format code snippets using appropriate LaTeX environments (e.g., listings or minted)
+- Ensure algorithms are presented using algorithm/algorithmic environments
+- Maintain consistent code style across all examples
+
+## Figure Guidelines
+- Create clear, informative figures with appropriate captions
+- Ensure all figures are referenced in the text
+- Use vector graphics when possible for better quality
+
+## Bibliography Management
+
+### Citation Format
+- Use the standard `\cite{key}` command for in-text citations (e.g., `\cite{smith2023neural}` or `\cite{smith2023neural, jones2022deep}` for multiple citations)
+
+### BibTeX Management
+- Store all references in a separate `.bib` file
+- Follow Google Scholar's BibTeX format for consistency:
+  - Use descriptive, consistent citation keys in the format `firstauthorYYYYkeyword` (e.g., `smith2023neural`)
+  - Include all essential fields: author, title, journal/booktitle, year, volume, pages, etc.
+  - Capitalize proper nouns in titles using curly braces (e.g., `{B}ayesian`)
+
