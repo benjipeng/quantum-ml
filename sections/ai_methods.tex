@@ -20,6 +20,96 @@ Graph Neural Networks (GNNs) process data structured as graphs, making them idea
 
 Transformer architectures, which leverage attention mechanisms to capture long-range dependencies, have recently been applied to quantum circuit design and control sequence optimization. These models can identify correlations between operations separated by significant circuit depth, enabling more efficient circuit synthesis and optimization.
 
+\begin{table}[!t]
+\centering
+\caption{Comparison of AI Approaches for Quantum Computing Applications}
+\label{tab:ai_comparison}
+\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{2.5cm}@{}}
+\toprule
+\textbf{AI Method} & \textbf{Key Mathematical Foundation} & \textbf{Quantum Applications} \\
+\midrule
+Neural Networks & $f(x) = (f_L \circ f_{L-1} \circ \cdots \circ f_1)(x)$ & Quantum state classification, Error syndrome decoding \\
+\midrule
+Reinforcement Learning & $J(\pi) = \mathbb{E}_{\tau \sim \pi}\left[\sum_{t=0}^{T} \gamma^t R(s_t, a_t, s_{t+1})\right]$ & Quantum control optimization, Circuit synthesis \\
+\midrule
+Generative Models & $\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x) || p(z))$ & Circuit design, Error correction code discovery \\
+\midrule
+Transfer Learning & $P(Y_T | X_T) = \int P(Y_T | X_T, K) P(K | \mathcal{T}_S) dK$ & Cross-platform optimization, Scaling to larger systems \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[scale=0.7, transform shape]
+    % CNN for quantum tomography
+    \begin{scope}[shift={(-5,0)}]
+        \draw[rounded corners, fill=qubitblue!10] (0,0) rectangle (2,3);
+        \node[align=center] at (1,-0.5) {CNN};
+        
+        % Input: tomography data
+        \draw[fill=gray!20] (0.25,0.25) rectangle (1.75,1.25);
+        \node[scale=0.8] at (1,0.75) {Tomography Data};
+        
+        % Convolution layers
+        \draw[fill=qubitblue!30] (0.5,1.5) rectangle (1.5,2.0);
+        \draw[fill=qubitblue!30] (0.5,2.2) rectangle (1.5,2.7);
+        
+        % Output
+        \draw[->, thick] (2,1.5) -- (3,1.5);
+        \node[above] at (2.5,1.5) {State};
+    \end{scope}
+    
+    % RNN for quantum control
+    \begin{scope}[shift={(0,0)}]
+        \draw[rounded corners, fill=controlred!10] (0,0) rectangle (2,3);
+        \node[align=center] at (1,-0.5) {RNN};
+        
+        % RNN cells
+        \draw[rounded corners, fill=controlred!30] (0.25,0.3) rectangle (1.75,0.8);
+        \draw[rounded corners, fill=controlred!30] (0.25,1.0) rectangle (1.75,1.5);
+        \draw[rounded corners, fill=controlred!30] (0.25,1.7) rectangle (1.75,2.2);
+        \draw[rounded corners, fill=controlred!30] (0.25,2.4) rectangle (1.75,2.9);
+        
+        % Recurrent connections
+        \draw[->, thick, controlred] (1.0,0.8) to[out=270,in=90] (0.5,0.3);
+        \draw[->, thick, controlred] (1.0,1.5) to[out=270,in=90] (0.5,1.0);
+        \draw[->, thick, controlred] (1.0,2.2) to[out=270,in=90] (0.5,1.7);
+        \draw[->, thick, controlred] (1.0,2.9) to[out=270,in=90] (0.5,2.4);
+        
+        % Output
+        \draw[->, thick] (2,1.5) -- (3,1.5);
+        \node[above] at (2.5,1.5) {Control};
+    \end{scope}
+    
+    % GNN for quantum circuits
+    \begin{scope}[shift={(5,0)}]
+        \draw[rounded corners, fill=quantumpurple!10] (0,0) rectangle (2,3);
+        \node[align=center] at (1,-0.5) {GNN};
+        
+        % Circuit graph
+        \filldraw[fill=quantumpurple!20] (0.5,0.5) circle (0.2);
+        \filldraw[fill=quantumpurple!20] (1.5,0.5) circle (0.2);
+        \filldraw[fill=quantumpurple!20] (0.5,1.5) circle (0.2);
+        \filldraw[fill=quantumpurple!20] (1.5,1.5) circle (0.2);
+        \filldraw[fill=quantumpurple!20] (1.0,2.5) circle (0.2);
+        
+        \draw[thick] (0.5,0.5) -- (1.5,0.5);
+        \draw[thick] (0.5,0.5) -- (0.5,1.5);
+        \draw[thick] (1.5,0.5) -- (1.5,1.5);
+        \draw[thick] (0.5,1.5) -- (1.5,1.5);
+        \draw[thick] (0.5,1.5) -- (1.0,2.5);
+        \draw[thick] (1.5,1.5) -- (1.0,2.5);
+        
+        % Output
+        \draw[->, thick] (2,1.5) -- (3,1.5);
+        \node[above] at (2.5,1.5) {Optimization};
+    \end{scope}
+\end{tikzpicture}
+\caption{Specialized neural network architectures for quantum computing tasks. Left: Convolutional Neural Networks (CNNs) process grid-like quantum tomography data to reconstruct quantum states. Center: Recurrent Neural Networks (RNNs) handle sequential quantum control tasks with temporal dependencies. Right: Graph Neural Networks (GNNs) operate on quantum circuits represented as graphs for optimization.}
+\label{fig:neural_architectures}
+\end{figure}
+
 \subsection{Reinforcement Learning for Quantum Control}
 
 Reinforcement learning formulates quantum control as a Markov decision process (MDP), where states $s \in \mathcal{S}$ represent quantum system configurations, actions $a \in \mathcal{A}$ correspond to control operations, transition dynamics $P(s'|s,a)$ follow quantum mechanical laws, and reward function $R(s,a,s')$ measures control quality (e.g., gate fidelity).
