@@ -12,6 +12,47 @@ Natural language interfaces for quantum algorithm design represent another promi
 
 The development of these foundation models will require significant advances in both training methodologies and quantum-specific architectures. Current approaches like transformers may need adaptation to better capture the unique structures of quantum data, such as the complex-valued nature of quantum states and the hierarchical organization of quantum circuits.
 
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[scale=0.75, transform shape]
+    % Define the timeline
+    \draw[thick, -] (0,0) -- (14,0);
+    
+    % Time periods
+    \node[align=center] at (2.5,-0.5) {Near-term\\(1-3 years)};
+    \node[align=center] at (7,-0.5) {Mid-term\\(3-5 years)};
+    \node[align=center] at (11.5,-0.5) {Long-term\\(5-10 years)};
+    
+    % Dividers
+    \draw[dashed] (5,4) -- (5,-0.2);
+    \draw[dashed] (9,4) -- (9,-0.2);
+    
+    % Near-term developments
+    \node[draw, rounded corners, fill=aigreen!10, text width=4cm, align=center] at (2.5,3.5) {Domain-specific AI-enhanced compilers};
+    \node[draw, rounded corners, fill=qubitblue!10, text width=4cm, align=center] at (2.5,2.5) {Real-time neural decoders for QEC};
+    \node[draw, rounded corners, fill=controlred!10, text width=4cm, align=center] at (2.5,1.5) {Noise-adaptive circuit optimization};
+    
+    % Mid-term developments
+    \node[draw, rounded corners, fill=aigreen!10, text width=4cm, align=center] at (7,3.5) {Foundation models for quantum circuit design};
+    \node[draw, rounded corners, fill=qubitblue!10, text width=4cm, align=center] at (7,2.5) {Differentiable end-to-end quantum programming};
+    \node[draw, rounded corners, fill=controlred!10, text width=4cm, align=center] at (7,1.5) {Self-optimizing quantum hardware};
+    
+    % Long-term developments
+    \node[draw, rounded corners, fill=aigreen!10, text width=4cm, align=center] at (11.5,3.5) {AI-discovered novel quantum algorithms};
+    \node[draw, rounded corners, fill=qubitblue!10, text width=4cm, align=center] at (11.5,2.5) {Fully autonomous quantum systems};
+    \node[draw, rounded corners, fill=controlred!10, text width=4cm, align=center] at (11.5,1.5) {Hardware-software co-evolution};
+    
+    % Timeline markers
+    \foreach \x in {0,5,9,14} {
+        \draw[thick] (\x,-0.1) -- (\x,0.1);
+    }
+    \node at (0,-0.3) {Now};
+    \node at (14,-0.3) {10+ years};
+\end{tikzpicture}
+\caption{Technology roadmap for AI-quantum integration showing anticipated developments across different time horizons. Near-term advances focus on practical enhancements to current systems, mid-term developments involve more sophisticated integration of AI throughout the quantum stack, and long-term goals include AI-driven discovery and autonomous quantum systems.}
+\label{fig:roadmap}
+\end{figure}
+
 \subsection{Differentiable Quantum Programming}
 
 End-to-end differentiable quantum programming environments will enable seamless integration of classical and quantum optimization. These environments allow gradients to flow through the entire quantum-classical computational pipeline, enabling more efficient optimization of hybrid quantum-classical algorithms.
@@ -23,6 +64,49 @@ Automatic differentiation systems that handle the complexities of quantum operat
 Hardware-aware gradient computation that accounts for device-specific noise characteristics represents a particularly valuable capability. By incorporating noise models into the differentiation process, these systems could optimize algorithms for specific quantum hardware rather than idealized models. This noise-aware optimization would produce circuits better suited for near-term quantum devices with significant error rates.
 
 These advances will accelerate the co-design of quantum algorithms and hardware by enabling rapid exploration of design spaces. Rather than treating hardware capabilities as fixed constraints, differentiable programming environments would allow simultaneous optimization of algorithm structure and hardware parameters, potentially identifying synergistic configurations that would be missed by separate optimization processes.
+
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[node distance=2cm, auto, >=latex', scale=0.75, transform shape]
+    % Classical optimizer
+    \node [draw, rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, fill=aigreen!10] (opt) {Classical Optimizer};
+    
+    % Differentiable circuit simulator
+    \node [draw, rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, fill=quantumpurple!10, below of=opt, node distance=2.5cm] (sim) {Differentiable Quantum Simulator};
+    
+    % Parameters
+    \node [draw, rectangle, minimum width=2cm, minimum height=0.8cm, left of=sim, node distance=3.5cm] (params) {Parameters $\theta$};
+    
+    % Cost function
+    \node [draw, rectangle, minimum width=2cm, minimum height=0.8cm, right of=sim, node distance=3.5cm] (cost) {Cost $C(\theta)$};
+    
+    % Gradient flow
+    \node [draw, rectangle, dashed, minimum width=2cm, minimum height=0.8cm, below of=cost, node distance=2cm] (grad) {$\nabla_\theta C$};
+    
+    % Quantum circuit
+    \node [below of=sim, node distance=2.5cm] (circ) {
+        \begin{quantikz}
+            \lstick{$\ket{0}$} & \gate{R_Y(\theta_1)} & \ctrl{1} & \gate{R_Z(\theta_3)} & \meter{} \\
+            \lstick{$\ket{0}$} & \gate{R_X(\theta_2)} & \targ{} & \gate{R_Y(\theta_4)} & \meter{}
+        \end{quantikz}
+    };
+    
+    % Connect everything with arrows
+    \draw[->] (params) -- (sim);
+    \draw[->] (sim) -- (cost);
+    \draw[->] (cost) -- (opt);
+    \draw[->, dashed, controlred] (cost) -- (grad);
+    \draw[->, dashed, controlred] (grad) -- +(-4,0) |- (opt);
+    \draw[<->, thick] (sim) -- (circ);
+    \draw[->, thick] (opt) -- ++(0,1.5) -| (params);
+    
+    % Automatic differentiation label
+    \node[draw, align=center, fill=controlred!10, rounded corners] at (0,-1) {Automatic\\Differentiation};
+    \draw[->, dashed, controlred] (0,-1) -- (0,-2);
+\end{tikzpicture}
+\caption{Differentiable quantum programming framework. The system enables gradient-based optimization of quantum circuit parameters using automatic differentiation through the quantum operations. The classical optimizer adjusts parameters based on gradients computed by differentiating through the entire quantum computation. This approach allows efficient exploration of parameter space and integration with classical machine learning frameworks.}
+\label{fig:diff_quantum}
+\end{figure}
 
 \subsection{Active Learning for Quantum Experimentation}
 

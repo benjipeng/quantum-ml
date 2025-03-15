@@ -32,6 +32,50 @@ Adaptive control has demonstrated particular value for non-Markovian quantum sys
 
 Another promising application is measurement-based feedback for quantum error correction. Neural network policies can determine optimal correction operations based on syndrome measurement sequences, accounting for both the observed error syndromes and the statistical correlations between errors. These adaptive approaches demonstrate higher error correction thresholds than standard table-based decoders, particularly for complex noise models with temporal and spatial correlations.
 
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[node distance=1.8cm, auto, >=latex', scale=0.8, transform shape]
+    % Quantum System
+    \node [draw, rectangle, rounded corners, minimum width=3cm, minimum height=1.5cm, fill=quantumpurple!10] (system) {Quantum System};
+    
+    % Measurement Device
+    \node [draw, rectangle, below of=system, minimum width=2.5cm, minimum height=1cm] (measure) {Measurement};
+    
+    % RNN Controller
+    \node [draw, rectangle, rounded corners, left of=system, node distance=5cm, minimum width=2.5cm, minimum height=3.5cm, fill=controlred!10] (controller) {RNN Controller};
+    
+    % Hidden state
+    \node [draw, rectangle, below of=controller, node distance=2.5cm, minimum width=2cm, minimum height=0.8cm, fill=controlred!30] (hidden) {Hidden State $h_t$};
+    
+    % Control Pulse
+    \node [draw, rectangle, above of=system, minimum width=2cm, minimum height=0.8cm] (pulse) {Control Pulse};
+    
+    % Arrows
+    \draw[->] (controller) -- node[above] {$a_t$} (system);
+    \draw[->] (system) -- node[right] {} (measure);
+    \draw[->] (measure) -- node[below] {$o_t$} ++(-3,0) |- (controller);
+    \draw[->] (controller) -- node[left] {} (hidden);
+    \draw[->] (hidden) -- ++(-1,0) |- node[left, near start] {$h_{t-1}$} (controller);
+    \draw[->] (controller) -- ++(-1,0) |- node[left] {$c_j(t)$} (pulse);
+    \draw[->] (pulse) -- (system);
+    
+    % System state
+    \node[draw, align=center, fill=quantumpurple!5] at (5,0) {System State $\rho_t$\\$\ket{\psi_t}$};
+    \draw[->] (system) -- (5,0);
+    
+    % Noise
+    \draw[snake=snake, segment amplitude=0.2mm, segment length=1mm, very thick, decorate, ->] (3.5,2) -- (system);
+    \node[right] at (3.5,2) {Noise};
+    
+    % Policy function
+    \node[draw, align=center, fill=controlred!5, below of=controller, node distance=4.5cm] 
+        (policy) {$\pi(a_t | o_1, o_2, \ldots, o_t) = \text{RNN}(o_t, h_{t-1})$};
+    \draw[->, dashed] (hidden) -- (policy);
+\end{tikzpicture}
+\caption{Recurrent neural network (RNN) based adaptive quantum control. The RNN controller processes measurement observations $o_t$ and maintains an internal hidden state $h_t$ representing its belief about the quantum system state. At each timestep, the controller outputs control actions $a_t$ that generate pulses $c_j(t)$ applied to the quantum system. This closed-loop control enables adaptation to system variations and environmental noise.}
+\label{fig:rnn_control}
+\end{figure}
+
 \subsection{Multi-qubit Operation Scheduling}
 
 Executing multiple operations across a quantum processor requires sophisticated scheduling to minimize crosstalk and maximize parallelism. Machine learning approaches formulate this as a constrained optimization problem:

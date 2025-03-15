@@ -34,6 +34,120 @@ Traditional decoding algorithms often face challenges scaling to larger code dis
 
 Recent implementations have demonstrated neural decoders with performance approaching or exceeding traditional algorithms like minimum-weight perfect matching, but with significantly reduced computational overhead. These advantages become particularly pronounced for complex noise models and when decoding must be performed under strict time constraints.
 
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[scale=0.75, transform shape]
+    % Surface code lattice
+    \begin{scope}[shift={(0,0)}]
+        % Data qubits
+        \foreach \i in {0,1,2,3,4} {
+            \foreach \j in {0,1,2,3,4} {
+                \filldraw[fill=qubitblue!30] (\i,\j) circle (0.2);
+            }
+        }
+        
+        % X-stabilizers (plaquettes)
+        \foreach \i in {0.5,1.5,2.5,3.5} {
+            \foreach \j in {0.5,1.5,2.5,3.5} {
+                \filldraw[fill=errororange!30] (\i,\j) circle (0.15);
+            }
+        }
+        
+        % Error on some qubits
+        \draw[thick, controlred] (1,1) circle (0.3);
+        \draw[thick, controlred] (2,2) circle (0.3);
+        \draw[thick, controlred] (1,2) circle (0.3);
+        
+        % Syndrome measurements (detected errors)
+        \filldraw[fill=controlred!80] (1.5,1.5) circle (0.15);
+        \filldraw[fill=controlred!80] (0.5,1.5) circle (0.15);
+        \filldraw[fill=controlred!80] (1.5,2.5) circle (0.15);
+        
+        \node[align=center] at (2,-0.5) {Surface Code\\with Error Syndrome};
+    \end{scope}
+    
+    % Neural network decoder
+    \begin{scope}[shift={(7,0)}]
+        % Input layer - syndrome
+        \foreach \i in {0,...,3} {
+            \foreach \j in {0,...,3} {
+                \filldraw[fill=gray!30] (0,\i/1.5+\j/6) circle (0.15);
+            }
+        }
+        
+        % Hidden layers
+        \foreach \i in {0,...,7} {
+            \filldraw[fill=quantumpurple!40] (1,\i/2) circle (0.15);
+        }
+        
+        \foreach \i in {0,...,7} {
+            \filldraw[fill=quantumpurple!40] (2,\i/2) circle (0.15);
+        }
+        
+        % Output layer - correction
+        \foreach \i in {0,...,4} {
+            \foreach \j in {0,...,4} {
+                \filldraw[fill=errororange!50] (3,\i/1.2+\j/6) circle (0.15);
+            }
+        }
+        
+        % Connect layers
+        \foreach \i in {0,...,3} {
+            \foreach \j in {0,...,3} {
+                \foreach \k in {0,...,7} {
+                    \draw[gray, thin, opacity=0.3] (0,\i/1.5+\j/6) -- (1,\k/2);
+                }
+            }
+        }
+        
+        \foreach \i in {0,...,7} {
+            \foreach \j in {0,...,7} {
+                \draw[gray, thin, opacity=0.3] (1,\i/2) -- (2,\j/2);
+            }
+        }
+        
+        \foreach \i in {0,...,7} {
+            \foreach \j in {0,...,4} {
+                \foreach \k in {0,...,4} {
+                    \draw[gray, thin, opacity=0.3] (2,\i/2) -- (3,\j/1.2+\k/6);
+                }
+            }
+        }
+        
+        \node[align=center] at (1.5,-0.5) {Neural Network\\Decoder};
+    \end{scope}
+    
+    % Arrow connecting them
+    \draw[->, thick] (4.5,2) -- (5.5,2);
+    
+    % Recovered state with correction
+    \begin{scope}[shift={(12,0)}]
+        % Data qubits
+        \foreach \i in {0,1,2,3,4} {
+            \foreach \j in {0,1,2,3,4} {
+                \filldraw[fill=qubitblue!30] (\i,\j) circle (0.2);
+            }
+        }
+        
+        % X-stabilizers (plaquettes)
+        \foreach \i in {0.5,1.5,2.5,3.5} {
+            \foreach \j in {0.5,1.5,2.5,3.5} {
+                \filldraw[fill=errororange!30] (\i,\j) circle (0.15);
+            }
+        }
+        
+        % Correction operations
+        \draw[thick, aigreen] (1,1) circle (0.3);
+        \draw[thick, aigreen] (2,2) circle (0.3);
+        \draw[thick, aigreen] (1,2) circle (0.3);
+        
+        \node[align=center] at (2,-0.5) {Corrected\\Quantum State};
+    \end{scope}
+\end{tikzpicture}
+\caption{Neural network-based decoding for the surface code. Left: A surface code lattice with data qubits (blue circles) and stabilizer measurements (orange circles). Errors on data qubits (red circles) cause syndrome measurements to detect stabilizer violations (red plaquettes). Center: A neural network processes the syndrome pattern to predict the most likely error configuration. Right: The decoder output determines correction operations (green circles) that restore the encoded quantum information.}
+\label{fig:neural_decoder}
+\end{figure}
+
 \subsection{Error Correction Code Discovery}
 
 The search for optimal quantum error correction codes presents a complex discrete optimization problem. Traditional code constructions rely on mathematical insights and specific algebraic structures, limiting exploration of the full code space. AI methods overcome these limitations by systematically exploring broader classes of codes.
@@ -80,7 +194,7 @@ Readout errors represent a significant source of computational inaccuracy in cur
 
 where $A$ is the calibration matrix and $\vec{p}$ represents measurement outcome probabilities. Neural networks can model complex readout error patterns, including state-dependent errors and temporal correlations that simple calibration matrices cannot capture. By incorporating these detailed error models, ML-enhanced readout error mitigation significantly improves measurement accuracy for multi-qubit systems.
 
-\subsection{Adaptive Measurement and Tomography}
+\subsubsection{Adaptive Measurement and Tomography}
 
 AI techniques enable more efficient quantum state characterization through adaptive measurement strategies. Traditional approaches to quantum state tomography require exponentially many measurements with qubit count, making full characterization infeasible for even moderate-sized systems.
 
@@ -102,4 +216,24 @@ where $y$ represents measurement outcomes, $\mathcal{A}$ is the measurement oper
 
 Neural tomography networks directly map measurement statistics to density matrix estimates, bypassing iterative reconstruction algorithms. These networks learn to recognize patterns in measurement data that indicate specific quantum state features, enabling rapid reconstruction with limited data. Convolutional architectures have proven particularly effective for reconstructing states with local correlations, such as those appearing in many condensed matter systems and quantum simulation experiments.
 
-The integration of these error correction and mitigation techniques, enhanced by AI, enables more reliable computation on both current and future quantum hardware. By tailoring error management strategies to specific devices and computational tasks, these approaches maximize the utility of available quantum resources. 
+The integration of these error correction and mitigation techniques, enhanced by AI, enables more reliable computation on both current and future quantum hardware. By tailoring error management strategies to specific devices and computational tasks, these approaches maximize the utility of available quantum resources.
+
+\begin{table}[!t]
+\centering
+\caption{Comparison of AI-Enhanced Error Mitigation Techniques}
+\label{tab:error_mitigation}
+\scalebox{0.9}{
+\begin{tabular}{@{}p{3cm}p{4cm}p{2.5cm}p{2.5cm}@{}}
+\toprule
+\textbf{Technique} & \textbf{AI Enhancement} & \textbf{Accuracy Improvement} & \textbf{Computational Overhead} \\
+\midrule
+Zero-Noise Extrapolation & Neural network for non-linear extrapolation & 2-5× reduction in error & Moderate (multiple circuit runs) \\
+\midrule
+Quantum Subspace Expansion & ML-identified optimal subspaces & 3-10× reduction in error & High (many additional measurements) \\
+\midrule
+Measurement Error Mitigation & NN-based correction beyond linear calibration & 5-20× reduction in readout error & Low (post-processing only) \\
+\midrule
+Adaptive Measurement & Bayesian experimental design with NNs & 2-4× reduction in tomography error & Moderate (real-time processing) \\
+\bottomrule
+\end{tabular}}
+\end{table} 
