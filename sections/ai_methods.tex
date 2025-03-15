@@ -1,0 +1,35 @@
+Beyond the brief overview in the introduction, this section explores in greater depth the AI methods that have proven most valuable in quantum computing research.
+
+\subsection{Deep Neural Networks}
+Deep neural networks have demonstrated remarkable capabilities in learning complex patterns and representations. Their ability to approximate arbitrarily complex functions \cite{hornik1989multilayer} makes them suitable for modeling quantum systems and phenomena.
+
+In the quantum domain, various neural network architectures have found applications:
+\begin{itemize}
+    \item \textbf{Convolutional Neural Networks (CNNs)}: Particularly useful for processing grid-like data, such as quantum state tomography results or error syndromes in surface codes.
+    \item \textbf{Recurrent Neural Networks (RNNs)}: Well-suited for sequence modeling, including quantum control sequences and time-dependent processes \cite{banchi2018modelling}.
+    \item \textbf{Graph Neural Networks (GNNs)}: Effective for problems involving quantum circuits represented as graphs or for quantum error correction decoders.
+    \item \textbf{Transformers}: Increasingly applied to quantum circuit design and optimization tasks, leveraging their attention mechanisms to capture long-range dependencies.
+\end{itemize}
+
+\subsection{Reinforcement Learning for Quantum Control}
+Reinforcement learning has emerged as a powerful approach for quantum control problems \cite{bukov2018reinforcement}. By framing quantum control as a sequential decision-making problem, RL agents can discover pulse sequences and control strategies that outperform traditional approaches.
+
+Key advantages of RL in the quantum domain include:
+\begin{itemize}
+    \item Ability to explore the control landscape without explicit gradient information
+    \item Robustness to noise and uncertainty in the quantum system
+    \item Capacity to discover counter-intuitive control strategies
+    \item Adaptability to changing system parameters and constraints
+\end{itemize}
+
+\subsection{Generative Models for Quantum States and Circuits}
+Generative models have shown promise in creating quantum circuits and representing quantum states. Recent advances include:
+\begin{itemize}
+    \item \textbf{Variational Autoencoders (VAEs)}: Used for efficient encoding and generation of quantum circuits
+    \item \textbf{Generative Adversarial Networks (GANs)}: Applied to generate quantum states and circuit designs
+    \item \textbf{Diffusion Models}: Recently applied to quantum circuit synthesis \cite{furrutter2024quantum}
+    \item \textbf{Foundation Models}: Large-scale pretrained models that can be fine-tuned for specific quantum tasks
+\end{itemize}
+
+\subsection{Hybrid Classical-Quantum Machine Learning}
+At the intersection of quantum computing and AI lies hybrid classical-quantum machine learning, where quantum processors accelerate certain machine learning subroutines or provide quantum enhancements to classical algorithms. While outside the scope of this review, these developments highlight the synergistic relationship between AI and quantum computing. 
